@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import Category, Product
+from .models import Category, Product, ProductoCategoria
 
 
 @login_required(login_url="/accounts/login/")
@@ -159,9 +159,9 @@ def ProductsAddView(request):
             "name": data['name'],
             "status": data['state'],
             "description": data['description'],
-            "category": Category.objects.get(id=data['category']),
             "price": data['price']
         }
+        
 
         # Check if a product with the same attributes exists
         if Product.objects.filter(**attributes).exists():
@@ -173,8 +173,20 @@ def ProductsAddView(request):
             # Create the product
             new_product = Product.objects.create(**attributes)
 
+            category_id = data["category"]
+            category = Category.objects.get(pk=category_id) 
+            attributes_productocategoria = {
+                "id_producto": new_product,
+                "id_categoria": category
+            }
+            new_productocategoria = ProductoCategoria.objects.create(**attributes_productocategoria)
             # If it doesn't exists save it
             new_product.save()
+
+            # ATRIBUTES TO ADD THE REGISTER TO THE TABLE PRODUCTCATEGORY
+            
+
+            new_productocategoria.save()
 
             messages.success(request, 'Product: ' +
                              attributes["name"] + ' created succesfully!', extra_tags="success")

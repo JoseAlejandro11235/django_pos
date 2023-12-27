@@ -38,8 +38,7 @@ class Product(models.Model):
         max_length=100,
         verbose_name="Status of the product",
     )
-    category = models.ForeignKey(
-        Category, related_name="category", on_delete=models.CASCADE, db_column='category')
+    
 
     price = models.FloatField(default=0)
 
@@ -58,3 +57,12 @@ class Product(models.Model):
         item['quantity'] = 1
         item['total_product'] = 0
         return item
+
+
+
+
+class ProductoCategoria(models.Model):
+    id_producto =  models.ForeignKey(Product, on_delete=models.CASCADE)
+    id_categoria =  models.ForeignKey(Category, on_delete=models.CASCADE)  
+    def __str__(self):
+        return str(self.pk)
