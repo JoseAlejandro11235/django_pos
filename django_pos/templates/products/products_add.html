@@ -1,13 +1,13 @@
 {% extends "pos/base.html" %}
 
 <!-- Page title  -->
-{% block title %}Add product{% endblock title %}
+{% block title %}Añadir producto{% endblock title %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 <!-- Page Heading -->
-{% block heading %}Add product{% endblock heading %}
+{% block heading %}Añadir producto{% endblock heading %}
 
 <!-- Page content  -->
 {% block content %}
@@ -16,7 +16,7 @@
     <a href="{% url 'products:products_list' %}">
         <button type="button" class="btn btn-info font-weight-bold">
             <i class="fas fa-long-arrow-alt-left mr-2"></i>
-            Go back
+            Atrás
         </button>
     </a>
 </div>
@@ -28,11 +28,11 @@
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label for="inputDescription">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Chicken Breasts..." required>
+                        <label for="inputDescription">Nombre</label>
+                        <input type="text" class="form-control" name="name" placeholder="Pechugas de pollo..." required>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="state">State</label>
+                        <label for="state">Estado</label>
                         <select name="state" class="form-control" required>
                             {% for status in product_status %}
                             <option value="{{status.0}}">{{status.1}}</option>
@@ -43,11 +43,11 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label for="inputDescription">Description</label>
-                        <input type="text" name="description" class="form-control" placeholder="Freshness Guaranteed Chicken Breast, 2.25 - 3.2 lb..." required>
+                        <label for="inputDescription">Descripción</label>
+                        <input type="text" name="description" class="form-control" placeholder="Pechuga de pollo fresca, 3 a 5 kilos..." required>
                     </div>
                     <div class="form-group col-md-4">
-                        <label>Category</label>
+                        <label>Categoria</label>
                         {% for category in categories %}
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="category" value="{{ category.id }}" id="category{{ category.id }}">
@@ -61,13 +61,13 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label for="inputPrice">Price</label>
+                        <label for="inputPrice">Precio</label>
                         <input type="number" name="price" step="any"  class="form-control" placeholder="10.99" required>
                     </div>
                 </div>
                 
 
-                <button type="submit" class="btn btn-success font-weight-bold">Create product</button>
+                <button type="submit" class="btn btn-success font-weight-bold">Crear producto</button>
                
             </form>
         </div>
