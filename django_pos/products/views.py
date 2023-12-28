@@ -147,7 +147,7 @@ def ProductsListView(request):
 @login_required(login_url="/accounts/login/")
 def ProductsAddView(request):
     context = {
-        "active_icon": "products_categories",
+        "active_icon": "products",
         "product_status": Product.status.field.choices,
         "categories": Category.objects.all().filter(status="ACTIVE")
     }
