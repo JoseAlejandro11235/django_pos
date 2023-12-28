@@ -53,7 +53,20 @@
                             <td>{{forloop.counter}}</td>
                             <td>{{p.name}}</td>
                             <td>{{p.description}}</td>
-                            <td>{{p.category}}</td>
+
+
+                            <td>
+                                {% for pc in productoscategorias %}
+                                    {% if pc.id_producto.name == p.name %}
+                                    {{ pc.id_categoria.name }}
+                                    {% if not loop.first %},{% endif %}
+                                    {% endif %}
+                                                                    
+                                {% endfor %}
+                            </td>
+
+
+
                             <td class="text-right">{{p.price}} $</td>
                             {% if p.status == "ACTIVE" %}
                             <td class="text-center">
