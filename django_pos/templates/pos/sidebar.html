@@ -32,13 +32,8 @@
         </a>
         <div id="collapseTwo" class="{% if "products" in request.path %} collapse show {% else %} collapse {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-<<<<<<< HEAD
                 <a class="{% if "categories" in request.path %} collapse-item active {% else %} collapse-item {% endif %}" href="{% url 'products:categories_list' %}">Categorías</a>
                 <a class="{% if active_icon == 'products' %} collapse-item active {% else %} collapse-item {% endif %}" href="{% url 'products:products_list' %}">Productos</a>
-=======
-                <a class="{% if "categories" in active_icon %} collapse-item active {% else %} collapse-item {% endif %}" href="{% url 'products:categories_list' %}">Categorías</a>
-                <a class="{% if "products_products" in active_icon %} collapse-item active {% else %} collapse-item {% endif %}" href="{% url 'products:products_list' %}">Productos</a>
->>>>>>> ef56967d85500c8bdef28c9abde67f2f009305d8
             </div>
         </div>               
     </li>
