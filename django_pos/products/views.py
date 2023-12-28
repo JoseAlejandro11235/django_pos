@@ -138,7 +138,8 @@ def CategoriesDeleteView(request, category_id):
 def ProductsListView(request):
     context = {
         "active_icon": "products",
-        "products": Product.objects.all()
+        "products": Product.objects.all(),
+        "productoscategorias": ProductoCategoria.objects.all()
     }
     return render(request, "products/products.html", context=context)
 
@@ -172,16 +173,15 @@ def ProductsAddView(request):
         try:
             # Create the product
             new_product = Product.objects.create(**attributes)
-
-            category_id = data["category"]
-            category = Category.objects.get(pk=category_id) 
-            attributes_productocategoria = {
-                "id_producto": new_product,
-                "id_categoria": category
-            }
-            new_productocategoria = ProductoCategoria.objects.create(**attributes_productocategoria)
-            # If it doesn't exists save it
-            new_product.save()
+            selected_categories = request.POST.getlist('category')
+            for category_id in selected_categories:
+                category = Category.objects.get(pk=category_id)
+                attributes_productocategoria = {
+                    "id_producto": new_product,
+                    "id_categoria": category
+                }
+                new_productocategoria = ProductoCategoria.objects.create(**attributes_productocategoria)
+                new_productocategoria.save()
 
             # ATRIBUTES TO ADD THE REGISTER TO THE TABLE PRODUCTCATEGORY
             
@@ -198,6 +198,7 @@ def ProductsAddView(request):
             return redirect('products:products_add')
 
     return render(request, "products/products_add.html", context=context)
+
 
 
 @login_required(login_url="/accounts/login/")
